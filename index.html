@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IVE Content Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/planner.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/images/invehicleevoltion-logo.svg" alt="In-Vehicle Evolution" class="brand-logo">
+      <span class="brand-divider" aria-hidden="true"></span>
+      <span class="brand-app">Content Planner</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <button class="btn btn-primary btn-new" id="btn-new" type="button"><span class="btn-new-plus" aria-hidden="true">+</span> New post</button>
+    <div class="main-head">
+      <section class="toolbar">
+        <div class="month-nav">
+          <button class="icon-btn" id="btn-prev" type="button" aria-label="Previous month">‹</button>
+          <h1 id="month-title">October 2026</h1>
+          <button class="icon-btn" id="btn-next" type="button" aria-label="Next month">›</button>
+          <button class="btn btn-ghost btn-sm" id="btn-today" type="button">Today</button>
+        </div>
+        <div class="view-toggle" role="tablist" aria-label="View">
+          <button type="button" role="tab" data-view="month" aria-selected="true">Calendar</button>
+          <button type="button" role="tab" data-view="week" aria-selected="false">Week</button>
+          <button type="button" role="tab" data-view="list" aria-selected="false">List</button>
+        </div>
+      </section>
+
+      <section class="filters" aria-label="Filters">
+        <div class="filter-group" id="channel-filters"></div>
+        <div class="filter-selects">
+          <label class="select-wrap"><span>Blog category</span>
+            <select id="filter-category"><option value="all">All</option></select>
+          </label>
+          <label class="select-wrap"><span>Status</span>
+            <select id="filter-status"><option value="all">All</option></select>
+          </label>
+        </div>
+      </section>
+    </div>
+    <section class="board" id="board" aria-live="polite"></section>
+    <aside class="sidebar">
+      <div class="panel">
+        <div class="panel-head">
+          <h2 class="panel-title">Events this month</h2>
+          <button type="button" class="btn btn-ghost btn-xs" id="btn-add-event">+ Add event</button>
+        </div>
+        <ul class="event-list" id="event-list"></ul>
+      </div>
+      <div class="panel">
+        <h2 class="panel-title">Mix</h2>
+        <div id="mix"></div>
+      </div>
+      <div class="panel">
+        <h2 class="panel-title">Blog categories</h2>
+        <div id="cat-mix"></div>
+      </div>
+      <p class="hint">Drag posts to another day to reschedule. Click a post to open it. With a post focused, <kbd>Alt</kbd> + arrow keys also moves it.</p>
+    </aside>
+  </main>
+
+  <dialog id="modal" class="modal" aria-labelledby="modal-title"></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/planner.js"></script>
+</body>
+</html>
