@@ -1,4 +1,5 @@
-/* In-Vehicle Evolution — content plan seed data.
+/* In-Vehicle Evolution — content plan seed data (v2).
+   Source: IVE-Content-Plan-Oct-Nov-2026_1.docx (proposed plan, Oct 8 – Nov 30, 2026).
    Edits made in the planner are saved in the browser (localStorage), which
    takes precedence over this file once it exists. */
 window.IVE_DATA = {
@@ -33,183 +34,289 @@ window.IVE_DATA = {
   ],
 
   posts: [
-    // ── Week 1 · Set the stage ─────────────────────────────────────────
+    // ── October 2026 ─────────────────────────────────────────
     {
-      id: 'p01', channel: 'ive', date: '2026-10-01', time: '09:00', status: 'published', event: '',
-      title: 'October roadmap: where to find us this month',
-      copy: "October is a big month on the road.\n\nWe'll be in Tysons Corner for the ATARC Roundtable, in Raleigh for the NC Transportation Summit, joining partners at the Mastercard Urban Mobility Hub in Amsterdam, and online for the V2X Tolling Peer Exchange.\n\nEvery stop has the same goal: making the journey easier, safer and more secure with trusted in-vehicle payments.\n\nWhich conversation should we bring back to you?\n\n#InVehicleEvolution #Tolling #ConnectedCar #InVehiclePayments",
-      notes: 'Carousel: one slide per event + closing CTA slide.'
+      id: "v01", channel: "jj", date: "2026-10-08", time: "08:30", status: "idea", event: "atarc",
+      title: "Heading to ATARC next week",
+      copy: "The question JJ is bringing to the roundtable: keeping trust and equity at the center as payments move into the vehicle. Invite to connect on site.",
+      notes: "Pillar: Thought leadership. Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p02', channel: 'jj', date: '2026-10-02', time: '08:30', status: 'published', event: '',
-      title: 'Toll agencies need to think like payment networks',
-      copy: "Something I keep coming back to:\n\nThe toll gantry is becoming a point of sale.\n\nWhen the car can pay on its own, agencies stop managing transponders and start managing trusted transactions. That calls for a different playbook, and different partners at the table.\n\nI'll be sharing more of what we're learning this month. Glad to compare notes with anyone working on the same problem.\n\n#Tolling #Mobility #InVehicleEvolution",
-      notes: 'Personal voice. No graphic needed; uses headshot.'
+      id: "v02", channel: "ive", date: "2026-10-09", time: "10:00", status: "idea", event: "atarc",
+      title: "ATARC preview: where we will be next week",
+      copy: "Event card announcing ATARC in Tysons Corner and the conversation we are joining. \"Follow along for takeaways.\"",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p03', channel: 'blog', date: '2026-10-05', time: '07:00', status: 'published', event: '', category: 'Thought leadership',
-      title: 'The Car Is the New Wallet: What Toll Agencies Should Plan for in 2027',
-      copy: 'Connected vehicles are turning every toll point into a payment moment. Here are the five decisions agencies should be making now (identity, tokenization, interoperability, customer consent and back-office readiness) before OEM payment platforms reach scale.',
-      notes: 'Pillar post for the month. Link back from every October recap.'
+      id: "v03", channel: "blog", date: "2026-10-12", time: "07:00", status: "idea", event: "", category: "Testing pilot technology",
+      title: "What We're Learning Through Testing",
+      copy: "Project update: what the road tests are measuring, early lessons on accuracy and reliability, and what comes next. (Strategy October angle.)",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p04', channel: 'ive', date: '2026-10-06', time: '10:00', status: 'scheduled', event: '',
-      title: 'Blog promo: The Car Is the New Wallet',
-      copy: "Your next toll payment might not involve a transponder at all.\n\nOur new article covers the five decisions toll agencies should make now as connected cars become payment devices.\n\nRead it on InVehicleEvolution.com 👇\n\n#InVehiclePayments #Tolling #ConnectedCar",
-      notes: 'Link in first comment.'
+      id: "v04", channel: "ive", date: "2026-10-12", time: "10:00", status: "idea", event: "",
+      title: "Blog promo: What we are learning through testing",
+      copy: "Project summary of the update + one stat or photo from testing. CTA to InVehicleEvolution.com/news.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p05', channel: 'email', date: '2026-10-07', time: '10:00', status: 'scheduled', event: '',
-      title: 'October newsletter: the road ahead',
-      subject: 'Four stops, one conversation: October with In-Vehicle Evolution',
-      preheader: 'ATARC, NC Transportation Summit, Amsterdam and V2X. Here is where to find us.',
-      cta: 'See the October lineup',
-      copy: 'Lead story: The Car Is the New Wallet (blog). Then an event lineup with dates and locations, an invite to meet in Raleigh, and V2X Peer Exchange registration.',
-      notes: 'Segment: full list. Hold Raleigh invite details until confirmed.'
+      id: "v05", channel: "jj", date: "2026-10-13", time: "08:30", status: "idea", event: "",
+      title: "Why testing in the real world matters",
+      copy: "Executive perspective on the testing update: why this milestone matters and what the tolling industry can learn from it.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p06', channel: 'jj', date: '2026-10-08', time: '08:30', status: 'drafting', event: 'atarc',
-      title: 'Heading to ATARC next week',
-      copy: "Next Wednesday I'm joining the ATARC Roundtable in Tysons Corner.\n\nThe question I'm bringing: how do public agencies keep trust and equity at the center as payments move into the vehicle?\n\nIf you'll be there, let's find time to talk.\n\n#ATARC #Tolling #GovTech #InVehicleEvolution",
-      notes: ''
+      id: "v06", channel: "ive", date: "2026-10-14", time: "10:00", status: "idea", event: "atarc",
+      title: "Live from ATARC",
+      copy: "On-site photo + one key quote from the session.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p07', channel: 'ive', date: '2026-10-09', time: '11:00', status: 'drafting', event: '',
-      title: 'In-vehicle payments 101 (carousel)',
-      copy: "How does a car pay a toll at 65 mph?\n\n1️⃣ The vehicle is identified at the gantry\n2️⃣ A secure token stands in for the card\n3️⃣ The payment is authorized in milliseconds\n4️⃣ The driver gets a receipt on the dashboard\n\nNo transponder. No account top-ups. Swipe through for the full picture →\n\n#TechnologyEducation #InVehiclePayments #ConnectedCar",
-      notes: 'Teaser for the Oct 12 education blog. 5-slide carousel.'
-    },
-
-    // ── Week 2 · ATARC ───────────────────────────────────────────────
-    {
-      id: 'p08', channel: 'blog', date: '2026-10-12', time: '07:00', status: 'drafting', event: '', category: 'Technology education',
-      title: 'In-Vehicle Payments 101: Tokenization, Identity and the Connected Car',
-      copy: 'A plain-language explainer for agency and OEM teams covering how vehicle identity, network tokenization and OEM wallets work together to make a toll payment frictionless and secure.',
-      notes: 'Include diagram of the transaction flow. Glossary sidebar.'
+      id: "v07", channel: "jj", date: "2026-10-14", time: "08:30", status: "idea", event: "atarc",
+      title: "ATARC takeaway",
+      copy: "The one line from the roundtable that stuck with JJ + his short reflection.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p09', channel: 'ive', date: '2026-10-13', time: '09:00', status: 'drafting', event: 'atarc',
-      title: 'Tomorrow: ATARC Roundtable',
-      copy: "Tomorrow we're in Tysons Corner for the ATARC Roundtable, talking with federal and state technology leaders about where connected-vehicle payments go next.\n\nFollow along here for takeaways.\n\n#ATARC #InVehicleEvolution #Tolling",
-      notes: 'Event card graphic.'
+      id: "v08", channel: "ive", date: "2026-10-15", time: "10:00", status: "idea", event: "",
+      title: "Video: Testing is underway, behind the scenes",
+      copy: "30–60 sec clip of road-testing footage showing the vehicle, the toll point and the in-dash experience.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p10', channel: 'ive', date: '2026-10-14', time: '13:00', status: 'idea', event: 'atarc',
-      title: 'Live from ATARC',
-      copy: "Live from the ATARC Roundtable in Tysons Corner 📍\n\n[Add photo + one key quote from the session]\n\n#ATARC #InVehicleEvolution",
-      notes: 'Capture photos on site. Post same day.'
+      id: "v09", channel: "ive", date: "2026-10-16", time: "10:00", status: "idea", event: "atarc",
+      title: "ATARC recap: 3 takeaways",
+      copy: "Carousel with three takeaways from the public-sector conversation on connected payments.",
+      notes: "Pillar: Listening & newsjacking. Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p11', channel: 'jj', date: '2026-10-14', time: '17:00', status: 'idea', event: 'atarc',
-      title: 'ATARC takeaway: trust is the product',
-      copy: "One line from today's ATARC Roundtable that stuck with me:\n\n[Insert quote]\n\nMy take: [1–2 sentences of reflection]\n\nThanks to everyone who joined the conversation.\n\n#ATARC #Tolling #InVehicleEvolution",
-      notes: 'Draft on site; JJ to approve before posting.'
+      id: "v10", channel: "jj", date: "2026-10-19", time: "08:30", status: "idea", event: "autoinn",
+      title: "What OEMs and toll operators need from each other",
+      copy: "Automakers and toll operators on one road: what each side needs from the other. Tie to the Auto Innovators OEM Roundtable.",
+      notes: "Title and angle from the proposed plan; final copy to follow. Auto Innovators date is TBD; move this post once confirmed."
     },
     {
-      id: 'p12', channel: 'ive', date: '2026-10-15', time: '10:00', status: 'idea', event: 'atarc',
-      title: 'ATARC recap: 3 takeaways',
-      copy: "3 takeaways from the ATARC Roundtable:\n\n→ [Takeaway 1]\n→ [Takeaway 2]\n→ [Takeaway 3]\n\nThe full recap is coming to the blog tomorrow.\n\n#ATARC #InVehiclePayments #Tolling",
-      notes: ''
+      id: "v11", channel: "ive", date: "2026-10-19", time: "10:00", status: "idea", event: "",
+      title: "How a transaction connects (explainer carousel)",
+      copy: "Four-slide explainer: vehicle infotainment → Tollsy → secure payment → toll facility.",
+      notes: "Pillar: Technology education. Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p13', channel: 'blog', date: '2026-10-16', time: '07:00', status: 'idea', event: 'atarc', category: 'Listening & newsjacking',
-      title: 'What the ATARC Roundtable Told Us About Public-Sector Appetite for Connected Payments',
-      copy: "A recap of the ATARC conversation: what agencies are asking about, where they're cautious, and how those concerns shape the in-vehicle payments roadmap.",
-      notes: 'Pull quotes from p10/p11. Publish within 48 hrs of event.'
-    },
-
-    // ── Week 3 · Pilots, OEMs & build-up to Raleigh ──────────────────
-    {
-      id: 'p14', channel: 'blog', date: '2026-10-19', time: '07:00', status: 'idea', event: 'ncts', category: 'Testing pilot technology',
-      title: "Inside the Pilot: What We're Testing on the Road, and Why",
-      copy: 'A behind-the-scenes look at the in-vehicle toll payment pilot: test goals, vehicles and partners involved, success metrics and early lessons. Sets up the conversation for the NC Transportation Summit.',
-      notes: 'Confirm what can be shared publicly with pilot partners.'
+      id: "v12", channel: "email", date: "2026-10-20", time: "10:00", status: "idea", event: "ncts",
+      title: "October update + meet us in Raleigh",
+      copy: "Monthly roundup: testing blog, behind-the-scenes video, ATARC takeaways. Invite to NC Transportation Summit and V2X.",
+      notes: "Title and angle from the proposed plan; final copy to follow. Email audience and platform to confirm."
     },
     {
-      id: 'p15', channel: 'ive', date: '2026-10-20', time: '10:00', status: 'idea', event: '',
-      title: 'Pilot blog promo',
-      copy: "What does it take to test in-vehicle toll payments on real roads?\n\nWe're sharing what we're testing, why it matters and what we've learned so far.\n\nRead the full story on the blog 👇\n\n#PilotProgram #InVehiclePayments #ConnectedCar",
-      notes: ''
+      id: "v13", channel: "blog", date: "2026-10-21", time: "07:00", status: "idea", event: "", category: "Thought leadership",
+      title: "How Connected Vehicles Could Change Toll Payments",
+      copy: "Monthly thought-leadership piece: from transponders to the connected car, and what it means for agencies, drivers and partners.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p16', channel: 'email', date: '2026-10-20', time: '09:00', status: 'idea', event: 'ncts',
-      title: 'Invite: meet us at the NC Transportation Summit',
-      subject: "Meet us in Raleigh on Oct 27: let's talk in-vehicle payments",
-      preheader: "We'll be at the NC Transportation Summit. Here's how to connect.",
-      cta: 'Book time with our team',
-      copy: 'Event invite with date and venue (Raleigh Convention Center), what we will be discussing, a link to the pilot blog, and a CTA to book a meeting.',
-      notes: 'Segment: NC + Southeast contacts, agency partners.'
+      id: "v14", channel: "ive", date: "2026-10-21", time: "10:00", status: "idea", event: "",
+      title: "Blog promo: How connected vehicles could change toll payments",
+      copy: "Short summary of the article + a pull quote graphic. CTA to read on the site.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p17', channel: 'jj', date: '2026-10-21', time: '08:30', status: 'idea', event: 'autoinn',
-      title: 'What OEMs and toll operators need from each other',
-      copy: "Automakers and toll operators have spent decades on parallel tracks.\n\nIn-vehicle payments put us on the same road. Here's what each side needs from the other for this to work:\n\n🚗 OEMs: [ ]\n🛣️ Operators: [ ]\n\nLooking forward to digging into this with the Auto Innovators OEM Roundtable.\n\n#AutoInnovators #ConnectedCar #Tolling",
-      notes: 'Auto Innovators date TBD. Move this post next to it once confirmed.'
+      id: "v15", channel: "jj", date: "2026-10-22", time: "08:30", status: "idea", event: "",
+      title: "The toll gantry is becoming a point of sale",
+      copy: "JJ's executive take on the article: why North Carolina is leaning into in-vehicle payments.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p18', channel: 'ive', date: '2026-10-22', time: '11:00', status: 'idea', event: 'v2x',
-      title: 'Register: V2X Tolling Peer Exchange',
-      copy: "V2X is changing how vehicles and infrastructure talk to each other, including how they pay.\n\nJoin the V2X Tolling Peer Exchange online on October 28.\n\n#V2X #Tolling #ConnectedVehicles",
-      notes: 'Add registration link if public.'
+      id: "v16", channel: "ive", date: "2026-10-22", time: "10:00", status: "idea", event: "v2x",
+      title: "Register: V2X Tolling Peer Exchange",
+      copy: "Invite to join the online peer exchange on Oct 28 and the question on the table.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p19', channel: 'jj', date: '2026-10-23', time: '08:30', status: 'idea', event: 'ncts',
-      title: 'See you in Raleigh next week',
-      copy: "Next Tuesday: NC Transportation Summit at the Raleigh Convention Center.\n\nNorth Carolina has a real chance to show what modern, frictionless tolling looks like. I'm looking forward to the conversation.\n\nComing? Let me know.\n\n#NCTransportationSummit #Tolling #InVehicleEvolution",
-      notes: ''
-    },
-
-    // ── Week 4 · Event week ──────────────────────────────────────────
-    {
-      id: 'p20', channel: 'ive', date: '2026-10-26', time: '09:00', status: 'idea', event: '',
-      title: 'Event week: Raleigh, Amsterdam & V2X',
-      copy: "Big week ahead 🗓️\n\n📍 Tue: NC Transportation Summit, Raleigh\n📍 Tue: Mastercard Urban Mobility Hub Partner Event, Amsterdam\n💻 Wed: V2X Tolling Peer Exchange, online\n\nTwo continents, one conversation about the future of in-vehicle payments.\n\n#InVehicleEvolution #Tolling #UrbanMobility",
-      notes: 'Graphic: three-stop route map.'
+      id: "v17", channel: "ive", date: "2026-10-23", time: "10:00", status: "idea", event: "",
+      title: "Newsjacking slot: industry news of the week",
+      copy: "Quick-turn commentary on a relevant Volvo, Mastercard, connected-vehicle or tolling announcement.",
+      notes: "Pillar: Listening & newsjacking. Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p21', channel: 'ive', date: '2026-10-27', time: '12:00', status: 'idea', event: 'ncts',
-      title: 'Live from the NC Transportation Summit',
-      copy: "Live from the NC Transportation Summit in Raleigh 📍\n\n[Photo + key moment]\n\n#NCTransportationSummit #InVehicleEvolution",
-      notes: ''
+      id: "v18", channel: "jj", date: "2026-10-26", time: "08:30", status: "idea", event: "ncts",
+      title: "See you in Raleigh tomorrow",
+      copy: "Why North Carolina can show what modern, frictionless tolling looks like. Invite to connect at the summit.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p22', channel: 'jj', date: '2026-10-27', time: '17:00', status: 'idea', event: 'ncts',
-      title: 'Reflections from the NC Transportation Summit',
-      copy: "What a day in Raleigh.\n\n[1 insight from the summit]\n[1 thank-you / shout-out]\n\nThe road to frictionless tolling runs through collaboration.\n\n#NCTransportationSummit #Tolling",
-      notes: ''
+      id: "v19", channel: "ive", date: "2026-10-26", time: "10:00", status: "idea", event: "",
+      title: "Event week: Raleigh, Amsterdam & V2X",
+      copy: "Three-stop week-ahead graphic: NC Transportation Summit, Mastercard Urban Mobility Hub, V2X Peer Exchange.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p23', channel: 'ive', date: '2026-10-27', time: '08:00', status: 'idea', event: 'mcuh',
-      title: 'Across the Atlantic: Mastercard Urban Mobility Hub',
-      copy: "Meanwhile in Amsterdam 🇳🇱\n\nWe're with partners at the Mastercard Urban Mobility Hub, comparing notes on how cities and mobility operators are making payments invisible to the traveler.\n\n#UrbanMobility #Mastercard #InVehiclePayments",
-      notes: 'Schedule for morning ET (afternoon CET). Confirm partner approval to tag.'
+      id: "v20", channel: "ive", date: "2026-10-27", time: "08:00", status: "idea", event: "mcuh",
+      title: "Meanwhile in Amsterdam: Mastercard Urban Mobility Hub",
+      copy: "Partner-event moment from Amsterdam: making payments invisible to the traveler.",
+      notes: "Title and angle from the proposed plan; final copy to follow. Partner approval needed before tagging Volvo or Mastercard."
     },
     {
-      id: 'p24', channel: 'ive', date: '2026-10-28', time: '09:00', status: 'idea', event: 'v2x',
-      title: 'Today: V2X Tolling Peer Exchange',
-      copy: "Today we're joining peers online for the V2X Tolling Peer Exchange.\n\nThe question on the table: how will vehicle-to-everything communication reshape toll collection?\n\n#V2X #Tolling #ConnectedVehicles",
-      notes: ''
+      id: "v21", channel: "ive", date: "2026-10-27", time: "13:00", status: "idea", event: "ncts",
+      title: "Live from the NC Transportation Summit",
+      copy: "On-site photo + key moment from Raleigh.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p25', channel: 'email', date: '2026-10-29', time: '10:00', status: 'idea', event: 'ncts',
-      title: 'Recap: October on the road',
-      subject: 'What we heard in Raleigh, Amsterdam and online',
-      preheader: 'Takeaways from NC Transportation Summit, the Mastercard Urban Mobility Hub and V2X.',
-      cta: 'Read the full recap',
-      copy: 'Thank-you and recap email in the style of the IBTTA follow-up: hero photo from Raleigh, key takeaways per event, featured voices, and a "Keep the conversation going" CTA band.',
-      notes: 'Mirror IBTTA recap template (Email-Event-Post-1).'
+      id: "v22", channel: "jj", date: "2026-10-27", time: "08:30", status: "idea", event: "ncts",
+      title: "Reflections from the NC Transportation Summit",
+      copy: "One insight from the day + a thank-you / shout-out.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p26', channel: 'jj', date: '2026-10-29', time: '08:30', status: 'idea', event: 'v2x',
-      title: 'V2X peer exchange: what agencies are asking',
-      copy: "Yesterday's V2X Tolling Peer Exchange surfaced the questions agencies are really asking:\n\n❓ [ ]\n❓ [ ]\n❓ [ ]\n\nNone of these have easy answers yet, and that's why peer exchanges matter.\n\n#V2X #Tolling",
-      notes: ''
+      id: "v23", channel: "ive", date: "2026-10-28", time: "10:00", status: "idea", event: "v2x",
+      title: "Today: V2X Tolling Peer Exchange",
+      copy: "How vehicle-to-everything communication could reshape toll collection.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: 'p27', channel: 'blog', date: '2026-10-30', time: '07:00', status: 'idea', event: 'mcuh', category: 'Thought leadership',
-      title: 'From Raleigh to Amsterdam: What October Taught Us About Interoperable In-Vehicle Payments',
-      copy: 'A month-end synthesis of ATARC, the NC Transportation Summit, the Mastercard Urban Mobility Hub and the V2X Peer Exchange. Covers the common threads, open questions and what comes next for interoperable in-vehicle payments.',
-      notes: 'Link back to the Oct 5 pillar post.'
+      id: "v24", channel: "jj", date: "2026-10-29", time: "08:30", status: "idea", event: "v2x",
+      title: "V2X: the questions agencies are asking",
+      copy: "Three open questions from the peer exchange and why peer conversations matter.",
+      notes: "Pillar: Listening & newsjacking. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v25", channel: "ive", date: "2026-10-29", time: "10:00", status: "idea", event: "",
+      title: "Testing for security, reliability and accuracy",
+      copy: "Carousel on what the pilot checks before a payment is trusted: security, reliability, accuracy.",
+      notes: "Pillar: Testing pilot technology. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v26", channel: "ive", date: "2026-10-30", time: "10:00", status: "idea", event: "",
+      title: "October on the road: month in review",
+      copy: "Carousel recap of ATARC, Raleigh, Amsterdam and V2X with one takeaway each.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
+    },
+    // ── November 2026 ─────────────────────────────────────────
+    {
+      id: "v27", channel: "blog", date: "2026-11-02", time: "07:00", status: "idea", event: "", category: "Technology education",
+      title: "Inside the Technology Behind In-Vehicle Payments",
+      copy: "Plain-language explainer of how the vehicle, Tollsy, secure payment processing and the toll facility work together.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v28", channel: "ive", date: "2026-11-02", time: "10:00", status: "idea", event: "",
+      title: "Blog promo: Inside the technology",
+      copy: "Explainer graphic + summary. CTA to the article.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v29", channel: "jj", date: "2026-11-03", time: "08:30", status: "idea", event: "",
+      title: "The best payment technology is the one drivers never notice",
+      copy: "Executive take on the explainer: why reducing friction for drivers is the real goal.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v30", channel: "email", date: "2026-11-04", time: "10:00", status: "idea", event: "",
+      title: "November update: October on the road",
+      copy: "Monthly roundup: takeaways from ATARC, Raleigh, Amsterdam and V2X, the technology explainer blog and the latest video.",
+      notes: "Title and angle from the proposed plan; final copy to follow. Email audience and platform to confirm."
+    },
+    {
+      id: "v31", channel: "ive", date: "2026-11-05", time: "10:00", status: "idea", event: "",
+      title: "Video: Meet the technology (Tollsy walkthrough)",
+      copy: "In-vehicle screen walkthrough of a toll payment, start to finish.",
+      notes: "Pillar: Technology education. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v32", channel: "jj", date: "2026-11-06", time: "08:30", status: "idea", event: "",
+      title: "Newsjacking slot: JJ commentary",
+      copy: "Timely executive comment on a tolling, mobility or payments headline that ties back to the pilot.",
+      notes: "Pillar: Listening & newsjacking. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v33", channel: "ive", date: "2026-11-09", time: "10:00", status: "idea", event: "",
+      title: "Pilot milestone: where testing stands",
+      copy: "Milestone graphic with a simple stat on testing progress and what comes next.",
+      notes: "Pillar: Testing pilot technology. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v34", channel: "jj", date: "2026-11-10", time: "08:30", status: "idea", event: "",
+      title: "What a month on the road taught me",
+      copy: "JJ reflects on the common thread across ATARC, Raleigh, Amsterdam and V2X.",
+      notes: "Pillar: Thought leadership. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v35", channel: "ive", date: "2026-11-11", time: "10:00", status: "idea", event: "",
+      title: "From transponders to connected vehicles (carousel)",
+      copy: "Timeline of how toll payment technology has evolved and where it goes next.",
+      notes: "Pillar: Technology education. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v36", channel: "ive", date: "2026-11-12", time: "10:00", status: "idea", event: "",
+      title: "Partner spotlight",
+      copy: "Spotlight a project partner (e.g. Volvo or Mastercard) and their role in the pilot.",
+      notes: "Title and angle from the proposed plan; final copy to follow. Partner approval needed before tagging Volvo or Mastercard."
+    },
+    {
+      id: "v37", channel: "ive", date: "2026-11-13", time: "10:00", status: "idea", event: "",
+      title: "Newsjacking slot: industry news of the week",
+      copy: "Quick-turn commentary on a relevant connected-vehicle, automotive or tolling announcement.",
+      notes: "Pillar: Listening & newsjacking. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v38", channel: "blog", date: "2026-11-16", time: "07:00", status: "idea", event: "", category: "Thought leadership",
+      title: "Reducing Friction Across the Tolling Ecosystem",
+      copy: "Monthly thought-leadership piece on the recurring theme: customer experience, interoperability and public-private collaboration.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v39", channel: "ive", date: "2026-11-16", time: "10:00", status: "idea", event: "",
+      title: "Blog promo: Reducing friction across the tolling ecosystem",
+      copy: "Pull-quote graphic + CTA to the article.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v40", channel: "jj", date: "2026-11-17", time: "08:30", status: "idea", event: "",
+      title: "Public-private partnership, done right",
+      copy: "Executive view on what makes the pilot partnership work and what other agencies can borrow.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v41", channel: "ive", date: "2026-11-18", time: "10:00", status: "idea", event: "",
+      title: "Video: Q&A with project leadership",
+      copy: "Short interview with JJ or Manish answering the most common questions about the pilot.",
+      notes: "Pillar: Thought leadership. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v42", channel: "ive", date: "2026-11-19", time: "10:00", status: "idea", event: "",
+      title: "FAQ: is paying from the car secure?",
+      copy: "FAQ graphic on how payment information is securely processed.",
+      notes: "Pillar: Technology education. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v43", channel: "jj", date: "2026-11-20", time: "08:30", status: "idea", event: "",
+      title: "What interoperability could look like",
+      copy: "JJ's view on a future where any connected car can pay any toll.",
+      notes: "Pillar: Thought leadership. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v44", channel: "ive", date: "2026-11-23", time: "10:00", status: "idea", event: "",
+      title: "How the customer experience is being evaluated",
+      copy: "Behind-the-scenes look at how testers rate the in-vehicle payment experience.",
+      notes: "Pillar: Testing pilot technology. Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v45", channel: "jj", date: "2026-11-24", time: "08:30", status: "idea", event: "",
+      title: "Thankful for the people behind the pilot",
+      copy: "Thanksgiving-week thank-you to the testing team and partners.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v46", channel: "blog", date: "2026-11-30", time: "07:00", status: "idea", event: "", category: "Testing pilot technology",
+      title: "From Testing to Real-World Enrollment: What Comes Next",
+      copy: "Project update on the path from road testing to enrollment, and what drivers and agencies can expect.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
+    },
+    {
+      id: "v47", channel: "ive", date: "2026-11-30", time: "10:00", status: "idea", event: "",
+      title: "Blog promo: From testing to enrollment",
+      copy: "Project summary + milestone graphic. CTA to the article.",
+      notes: "Title and angle from the proposed plan; final copy to follow."
     }
   ]
 };

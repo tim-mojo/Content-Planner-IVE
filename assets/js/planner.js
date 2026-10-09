@@ -2,8 +2,8 @@
   'use strict';
 
   const D = window.IVE_DATA;
-  const STORE = 'ive-content-planner-v1';
-  const UI_STORE = 'ive-content-planner-ui-v1';
+  const STORE = 'ive-content-planner-v2';
+  const UI_STORE = 'ive-content-planner-ui-v2';
   const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -498,7 +498,7 @@
   let dbPromise;
   function db() {
     dbPromise = dbPromise || new Promise((resolve, reject) => {
-      const req = indexedDB.open('ive-content-planner', 1);
+      const req = indexedDB.open('ive-content-planner-v2', 1);
       req.onupgradeneeded = () => req.result.createObjectStore('images');
       req.onsuccess = () => resolve(req.result);
       req.onerror = () => reject(req.error);
