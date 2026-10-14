@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IVE Content Planner v2</title>
+  <title>IVE Content Planner v3</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -69,6 +69,14 @@
   </main>
 
   <dialog id="modal" class="modal" aria-labelledby="modal-title"></dialog>
+  <dialog id="unsaved" class="confirm" aria-labelledby="unsaved-heading" aria-describedby="unsaved-text">
+    <h2 id="unsaved-heading">Changes weren’t saved</h2>
+    <p id="unsaved-text">You have unsaved changes to “<span id="unsaved-title"></span>”. Save them before leaving?</p>
+    <div class="confirm-actions">
+      <button type="button" class="btn btn-ghost" data-unsaved="exit">Exit without saving</button>
+      <button type="button" class="btn btn-primary" data-unsaved="save">Save</button>
+    </div>
+  </dialog>
   <div class="toast" id="toast" role="status" hidden></div>
 
   <script src="assets/js/data.js"></script>

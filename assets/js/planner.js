@@ -2,8 +2,8 @@
   'use strict';
 
   const D = window.IVE_DATA;
-  const STORE = 'ive-content-planner-v2';
-  const UI_STORE = 'ive-content-planner-ui-v2';
+  const STORE = 'ive-content-planner-v3';
+  const UI_STORE = 'ive-content-planner-ui-v3';
   const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -426,9 +426,10 @@
   const hasCustom = p => p.image === 'custom';
   function postImg(p, cls, alt) {
     if (p.image === 'none') return '';
-    if (hasCustom(p) && imageURLs.has(p.id)) {
+    const url = (p === draft && draftImageURL) || imageURLs.get(p.id);
+    if (hasCustom(p) && url) {
       const [w, h] = p.imageSize || [];
-      return `<img class="${cls}" src="${imageURLs.get(p.id)}"${w ? ` width="${w}" height="${h}"` : ''} alt="${esc(alt)}">`;
+      return `<img class="${cls}" src="${url}"${w ? ` width="${w}" height="${h}"` : ''} alt="${esc(alt)}">`;
     }
     const c = D.channels[p.channel];
     return `<img class="${cls}" src="${c.image}" width="${c.size[0]}" height="${c.size[1]}" alt="${esc(alt)} placeholder">`;
@@ -497,12 +498,20 @@
   const imageURLs = new Map();
   let dbPromise;
   function db() {
-    dbPromise = dbPromise || new Promise((resolve, reject) => {
-      const req = indexedDB.open('ive-content-planner-v2', 1);
-      req.onupgradeneeded = () => req.result.createObjectStore('images');
-      req.onsuccess = () => resolve(req.result);
+    const open = version => new Promise((resolve, reject) => {
+      const req = indexedDB.open('ive-content-planner-v3', version);
+      req.onupgradeneeded = () => { if (!req.result.objectStoreNames.contains('images')) req.result.createObjectStore('images'); };
+      req.onsuccess = () => {
+        const d = req.result;
+        // Recover if the database exists without its image store
+        if (d.objectStoreNames.contains('images')) return resolve(d);
+        const next = d.version + 1;
+        d.close();
+        open(next).then(resolve, reject);
+      };
       req.onerror = () => reject(req.error);
     });
+    dbPromise = dbPromise || open();
     return dbPromise;
   }
   async function idb(mode, fn) {
@@ -525,8 +534,7 @@
     await Promise.all(posts.filter(hasCustom).map(async p => {
       try { const b = await getImage(p.id); if (b) cacheURL(p.id, b); } catch (e) { /* ignore */ }
     }));
-    const p = current && byId(current);
-    if (p && hasCustom(p)) refreshModal(p, true);
+    if (draft && hasCustom(draft) && !draftImageURL) refreshModal(draft, true);
   }
 
   function imageFieldHTML(p) {
@@ -547,43 +555,62 @@
     </div>`;
   }
 
-  async function setPostImage(p, file) {
+  // Image changes are staged on the draft and only written to IndexedDB on Save
+  async function setPostImage(file) {
+    if (!draft) return;
     if (!file || !file.type.startsWith('image/')) return toast('Please choose an image file');
-    try {
-      await putImage(p.id, file);
-    } catch (e) {
-      return toast('Could not save the image in this browser');
-    }
     let size;
     try { const bmp = await createImageBitmap(file); size = [bmp.width, bmp.height]; bmp.close(); } catch (e) { /* SVG etc. */ }
-    cacheURL(p.id, file);
-    Object.assign(p, { image: 'custom', imageName: file.name, imageSize: size });
-    if (!size) delete p.imageSize;
-    save();
-    if (current === p.id) refreshModal(p, true);
-    toast('Image uploaded');
+    setDraftImageURL(file);
+    pendingImage = { blob: file };
+    Object.assign(draft, { image: 'custom', imageName: file.name, imageSize: size });
+    if (!size) delete draft.imageSize;
+    markDirty(true);
   }
 
-  async function removePostImage(p) {
-    const before = { image: p.image, imageName: p.imageName, imageSize: p.imageSize };
-    const blob = hasCustom(p) ? await getImage(p.id).catch(() => null) : null;
-    if (blob) await deleteImage(p.id).catch(() => {});
-    cacheURL(p.id, null);
-    p.image = 'none'; delete p.imageName; delete p.imageSize;
-    save();
-    if (current === p.id) refreshModal(p, true);
-    toast('Image deleted', async () => {
-      if (blob) { await putImage(p.id, blob).catch(() => {}); cacheURL(p.id, blob); }
-      Object.assign(p, before);
-      save();
-      if (current === p.id) refreshModal(p, true);
-    });
+  function removePostImage() {
+    setDraftImageURL(null);
+    pendingImage = { blob: null };
+    draft.image = 'none'; delete draft.imageName; delete draft.imageSize;
+    markDirty(true);
+  }
+
+  function usePlaceholder() {
+    setDraftImageURL(null);
+    pendingImage = { blob: null };
+    delete draft.image; delete draft.imageName; delete draft.imageSize;
+    markDirty(true);
+  }
+
+  function setDraftImageURL(blob) {
+    if (draftImageURL) URL.revokeObjectURL(draftImageURL);
+    draftImageURL = blob ? URL.createObjectURL(blob) : null;
   }
 
   // ── Post modal ─────────────────────────────────────────────────────
   const modal = $('#modal');
+  const unsavedDialog = $('#unsaved');
   let current = null;
   let currentEvent = null;
+  // Post edits happen on a draft copy; nothing is stored until Save.
+  let draft = null;
+  let isNewPost = false;
+  let dirty = false;
+  let pendingImage = null;    // { blob } staged upload (blob) or removal (null)
+  let draftImageURL = null;
+
+  function markDirty(rebuildEditor) {
+    dirty = true;
+    refreshModal(draft, rebuildEditor);
+    updateSaveState();
+  }
+  function saveNote() { return dirty ? 'Unsaved changes' : (isNewPost ? 'New post: not saved yet' : 'All changes saved'); }
+  function updateSaveState() {
+    const btn = $('[data-act="save"]', modal);
+    const note = $('.saved-note', modal);
+    if (btn) btn.disabled = !dirty;
+    if (note) { note.textContent = saveNote(); note.classList.toggle('is-dirty', dirty); }
+  }
 
   function orderedVisible() { return sortPosts(posts.filter(isVisible)); }
 
@@ -611,10 +638,13 @@
       <label class="field"><span>${copyLabel} ${limit}</span><textarea name="copy" class="${p.channel === 'ive' || p.channel === 'jj' ? 'tall' : ''}">${esc(p.copy || '')}</textarea></label>
       <label class="field"><span>Notes</span><textarea name="notes" placeholder="Assets, approvals, links…">${esc(p.notes || '')}</textarea></label>
       <div class="editor-foot">
-        <span class="saved-note">Changes save automatically</span>
+        <span class="foot-left">
+          <button type="button" class="btn btn-primary btn-save" data-act="save"${dirty ? '' : ' disabled'}>Save</button>
+          <span class="saved-note${dirty ? ' is-dirty' : ''}">${saveNote()}</span>
+        </span>
         <span style="display:flex;gap:8px">
-          <button type="button" class="btn btn-ghost btn-sm" data-act="duplicate">Duplicate</button>
-          <button type="button" class="btn btn-danger btn-sm" data-act="delete">Delete</button>
+          <button type="button" class="btn btn-ghost btn-sm" data-act="duplicate"${isNewPost ? ' disabled' : ''}>Duplicate</button>
+          <button type="button" class="btn btn-danger btn-sm" data-act="delete">${isNewPost ? 'Discard' : 'Delete'}</button>
         </span>
       </div>`;
   }
@@ -633,18 +663,90 @@
       </div>`;
   }
 
-  function openPost(id) {
-    const p = byId(id);
+  function openPost(id, newPost) {
+    const p = newPost || byId(id);
     if (!p) return;
     current = p.id;
-    modal.innerHTML = `<div class="modal-head">${headHTML(p)}</div>
+    currentEvent = null;
+    draft = clone(p);
+    isNewPost = !!newPost;
+    dirty = false;
+    pendingImage = null;
+    setDraftImageURL(null);
+    modal.innerHTML = `<div class="modal-head">${headHTML(draft)}</div>
       <div class="modal-body">
-        <div class="preview-pane" id="preview">${previewFor(p)}</div>
-        <form class="editor" id="editor" autocomplete="off">${editorHTML(p)}</form>
+        <div class="preview-pane" id="preview">${previewFor(draft)}</div>
+        <form class="editor" id="editor" autocomplete="off">${editorHTML(draft)}</form>
       </div>`;
     if (!modal.open) modal.showModal();
-    history.replaceState(null, '', '#post=' + p.id);
+    if (!isNewPost) history.replaceState(null, '', '#post=' + p.id);
   }
+
+  async function savePost() {
+    if (!draft) return false;
+    try {
+      if (pendingImage) {
+        if (pendingImage.blob) { await putImage(draft.id, pendingImage.blob); cacheURL(draft.id, pendingImage.blob); }
+        else { await deleteImage(draft.id).catch(() => {}); cacheURL(draft.id, null); }
+      }
+    } catch (e) {
+      toast('Could not save the image in this browser');
+      return false;
+    }
+    let p = byId(draft.id);
+    if (!p) { p = {}; posts.push(p); }
+    Object.keys(p).forEach(k => delete p[k]);
+    Object.assign(p, clone(draft));
+    save();
+    const wasNew = isNewPost;
+    isNewPost = false;
+    dirty = false;
+    pendingImage = null;
+    setDraftImageURL(null);
+    focusDate(p.date);
+    render();
+    if (modal.open && current === p.id) {
+      refreshModal(draft, true);
+      if (wasNew) history.replaceState(null, '', '#post=' + p.id);
+    }
+    toast('Changes saved');
+    return true;
+  }
+
+  // Run `leave` now, or after the person chooses Save / Exit in the warning
+  let pendingLeave = null;
+  function guardLeave(leave) {
+    if (!draft || !dirty) return leave();
+    pendingLeave = leave;
+    $('#unsaved-title', unsavedDialog).textContent = draft.title || 'this post';
+    unsavedDialog.showModal();
+    $('[data-unsaved="save"]', unsavedDialog).focus();
+  }
+  function discardDraft() {
+    dirty = false;
+    pendingImage = null;
+    setDraftImageURL(null);
+  }
+  unsavedDialog.addEventListener('click', async e => {
+    const choice = e.target.closest('[data-unsaved]')?.dataset.unsaved;
+    if (!choice && e.target !== unsavedDialog) return;
+    const leave = pendingLeave;
+    pendingLeave = null;
+    unsavedDialog.close();
+    if (choice === 'save') { if (!(await savePost())) return; }
+    else if (choice === 'exit') discardDraft();
+    else return;               // backdrop click: keep editing
+    leave && leave();
+  });
+  // Escape on the warning returns to editing
+  unsavedDialog.addEventListener('cancel', () => { pendingLeave = null; });
+  // Escape on the editor goes through the same check
+  modal.addEventListener('cancel', e => {
+    if (draft && dirty) { e.preventDefault(); guardLeave(() => modal.close()); }
+  });
+  window.addEventListener('beforeunload', e => {
+    if (draft && dirty) { e.preventDefault(); e.returnValue = ''; }
+  });
 
   function refreshModal(p, rebuildEditor) {
     $('.modal-head', modal).innerHTML = headHTML(p);
@@ -655,38 +757,32 @@
   modal.addEventListener('input', e => {
     const f = e.target;
     if (f.closest('#event-editor')) return updateEvent(f);
-    if (!f.name || !current) return;
-    const p = byId(current);
+    if (!f.name || !draft || !f.closest('#editor')) return;
     if (f.name === 'date' && !f.value) return;
-    p[f.name] = f.value;
+    draft[f.name] = f.value;
     if (f.name === 'copy') { const c = $('[data-count]', modal); if (c) c.textContent = `${f.value.length.toLocaleString()} / 3,000`; }
     if (f.name === 'subject') { const c = $('[data-subj]', modal); if (c) c.textContent = `${f.value.length} chars`; }
-    const structural = f.name === 'channel';
-    if (f.name === 'channel' && p.channel !== 'blog') delete p.category;
-    if (f.name === 'date') focusDate(p.date);
-    save();
-    refreshModal(p, structural);
-    render();
+    if (f.name === 'channel' && draft.channel !== 'blog') delete draft.category;
+    markDirty(f.name === 'channel');
   });
 
   modal.addEventListener('click', e => {
-    if (e.target === modal) return modal.close(); // backdrop
+    if (e.target === modal) return guardLeave(() => modal.close()); // backdrop
     const act = e.target.closest('[data-act]')?.dataset.act;
     if (!act) return;
-    if (act === 'close') return modal.close();
+    if (act === 'close') return guardLeave(() => modal.close());
+    if (act === 'save') return savePost();
     if (act === 'prev' || act === 'next') {
       const list = orderedVisible();
       const i = list.findIndex(x => x.id === current);
       const next = list[i + (act === 'next' ? 1 : -1)];
-      if (next) {
-        focusDate(next.date); render();
-        openPost(next.id);
-      }
+      if (next) guardLeave(() => { focusDate(next.date); render(); openPost(next.id); });
       return;
     }
-    if (act === 'img-delete') return removePostImage(byId(current));
-    if (act === 'img-placeholder') { const p = byId(current); delete p.image; save(); return refreshModal(p, true); }
+    if (act === 'img-delete') return removePostImage();
+    if (act === 'img-placeholder') return usePlaceholder();
     if (act === 'duplicate') {
+      if (dirty) return toast('Save your changes before duplicating');
       const src = byId(current);
       const copy = { ...clone(src), id: newId(), title: src.title + ' (copy)', status: 'idea' };
       posts.push(copy); save(); render(); openPost(copy.id);
@@ -699,8 +795,10 @@
       return;
     }
     if (act === 'delete') {
+      if (isNewPost) { discardDraft(); return modal.close(); }
       const p = byId(current);
       if (!confirm(`Delete “${p.title}”?`)) return;
+      discardDraft();
       const idx = posts.indexOf(p);
       posts.splice(idx, 1); save(); modal.close(); render();
       toast('Post deleted', () => { posts.splice(idx, 0, p); save(); render(); });
@@ -710,7 +808,7 @@
     if (act === 'delete-event') { const id = currentEvent; modal.close(); deleteEvent(id); }
   });
   modal.addEventListener('change', e => {
-    if (e.target.matches('[data-img-input]') && current) setPostImage(byId(current), e.target.files[0]);
+    if (e.target.matches('[data-img-input]') && draft) setPostImage(e.target.files[0]);
   });
   modal.addEventListener('dragover', e => {
     const zone = e.target.closest('[data-drop]');
@@ -724,9 +822,11 @@
     if (!zone) return;
     e.preventDefault();
     zone.classList.remove('drag-over');
-    if (current) setPostImage(byId(current), e.dataTransfer.files[0]);
+    if (draft) setPostImage(e.dataTransfer.files[0]);
   });
   modal.addEventListener('keydown', e => {
+    // Cmd/Ctrl + S saves the open post
+    if (draft && (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); if (dirty) savePost(); return; }
     if (!current || ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
     if (e.key === 'ArrowRight') $('[data-act="next"]', modal)?.click();
     if (e.key === 'ArrowLeft') $('[data-act="prev"]', modal)?.click();
@@ -735,6 +835,9 @@
     if (modal.open) return;
     current = null;
     currentEvent = null;
+    draft = null;
+    isNewPost = false;
+    discardDraft();
     history.replaceState(null, '', location.pathname + location.search);
   });
 
@@ -742,7 +845,7 @@
     const first = [...ui.channels][0] || 'ive';
     const p = { id: newId(), channel: first, date, time: '09:00', status: 'idea', event: '', title: 'Untitled post', copy: '', notes: '' };
     if (first === 'blog') p.category = ui.category !== 'all' ? ui.category : '';
-    posts.push(p); save(); render(); openPost(p.id);
+    openPost(p.id, p);
     setTimeout(() => { const t = $('input[name="title"]', modal); t?.focus(); t?.select(); }, 30);
   }
   $('#btn-new').addEventListener('click', () => {

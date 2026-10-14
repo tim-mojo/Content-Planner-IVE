@@ -1,4 +1,4 @@
-/* In-Vehicle Evolution — content plan seed data (v2).
+/* In-Vehicle Evolution — content plan seed data (v3: ATARC Roundtable removed).
    Source: IVE-Content-Plan-Oct-Nov-2026_1.docx (proposed plan, Oct 8 – Nov 30, 2026).
    Edits made in the planner are saved in the browser (localStorage), which
    takes precedence over this file once it exists. */
@@ -26,7 +26,6 @@ window.IVE_DATA = {
   },
 
   events: [
-    { id: 'atarc',   name: 'ATARC Roundtable',                         date: '2026-10-14', location: 'Tysons Corner, VA' },
     { id: 'autoinn', name: 'Auto Innovators OEM Roundtable',            window: ['2026-10-15', '2026-10-31'], when: 'Mid–Late October 2026', location: 'TBD', tentative: true },
     { id: 'ncts',    name: 'NC Transportation Summit',                  date: '2026-10-27', location: 'Raleigh Convention Center, Raleigh, NC', url: 'https://www.nctransportationsummit.com/' },
     { id: 'mcuh',    name: 'Mastercard Urban Mobility Hub Partner Event', date: '2026-10-27', location: 'Mastercard Amsterdam Office' },
@@ -35,18 +34,6 @@ window.IVE_DATA = {
 
   posts: [
     // ── October 2026 ─────────────────────────────────────────
-    {
-      id: "v01", channel: "jj", date: "2026-10-08", time: "08:30", status: "idea", event: "atarc",
-      title: "Heading to ATARC next week",
-      copy: "The question JJ is bringing to the roundtable: keeping trust and equity at the center as payments move into the vehicle. Invite to connect on site.",
-      notes: "Pillar: Thought leadership. Title and angle from the proposed plan; final copy to follow."
-    },
-    {
-      id: "v02", channel: "ive", date: "2026-10-09", time: "10:00", status: "idea", event: "atarc",
-      title: "ATARC preview: where we will be next week",
-      copy: "Event card announcing ATARC in Tysons Corner and the conversation we are joining. \"Follow along for takeaways.\"",
-      notes: "Title and angle from the proposed plan; final copy to follow."
-    },
     {
       id: "v03", channel: "blog", date: "2026-10-12", time: "07:00", status: "idea", event: "", category: "Testing pilot technology",
       title: "What We're Learning Through Testing",
@@ -66,28 +53,10 @@ window.IVE_DATA = {
       notes: "Title and angle from the proposed plan; final copy to follow."
     },
     {
-      id: "v06", channel: "ive", date: "2026-10-14", time: "10:00", status: "idea", event: "atarc",
-      title: "Live from ATARC",
-      copy: "On-site photo + one key quote from the session.",
-      notes: "Title and angle from the proposed plan; final copy to follow."
-    },
-    {
-      id: "v07", channel: "jj", date: "2026-10-14", time: "08:30", status: "idea", event: "atarc",
-      title: "ATARC takeaway",
-      copy: "The one line from the roundtable that stuck with JJ + his short reflection.",
-      notes: "Title and angle from the proposed plan; final copy to follow."
-    },
-    {
       id: "v08", channel: "ive", date: "2026-10-15", time: "10:00", status: "idea", event: "",
       title: "Video: Testing is underway, behind the scenes",
       copy: "30–60 sec clip of road-testing footage showing the vehicle, the toll point and the in-dash experience.",
       notes: "Title and angle from the proposed plan; final copy to follow."
-    },
-    {
-      id: "v09", channel: "ive", date: "2026-10-16", time: "10:00", status: "idea", event: "atarc",
-      title: "ATARC recap: 3 takeaways",
-      copy: "Carousel with three takeaways from the public-sector conversation on connected payments.",
-      notes: "Pillar: Listening & newsjacking. Title and angle from the proposed plan; final copy to follow."
     },
     {
       id: "v10", channel: "jj", date: "2026-10-19", time: "08:30", status: "idea", event: "autoinn",
@@ -104,7 +73,7 @@ window.IVE_DATA = {
     {
       id: "v12", channel: "email", date: "2026-10-20", time: "10:00", status: "idea", event: "ncts",
       title: "October update + meet us in Raleigh",
-      copy: "Monthly roundup: testing blog, behind-the-scenes video, ATARC takeaways. Invite to NC Transportation Summit and V2X.",
+      copy: "Monthly roundup: testing blog and behind-the-scenes video. Invite to NC Transportation Summit and V2X.",
       notes: "Title and angle from the proposed plan; final copy to follow. Email audience and platform to confirm."
     },
     {
@@ -188,7 +157,7 @@ window.IVE_DATA = {
     {
       id: "v26", channel: "ive", date: "2026-10-30", time: "10:00", status: "idea", event: "",
       title: "October on the road: month in review",
-      copy: "Carousel recap of ATARC, Raleigh, Amsterdam and V2X with one takeaway each.",
+      copy: "Carousel recap of Raleigh, Amsterdam and V2X with one takeaway each.",
       notes: "Title and angle from the proposed plan; final copy to follow."
     },
     // ── November 2026 ─────────────────────────────────────────
@@ -213,7 +182,7 @@ window.IVE_DATA = {
     {
       id: "v30", channel: "email", date: "2026-11-04", time: "10:00", status: "idea", event: "",
       title: "November update: October on the road",
-      copy: "Monthly roundup: takeaways from ATARC, Raleigh, Amsterdam and V2X, the technology explainer blog and the latest video.",
+      copy: "Monthly roundup: takeaways from Raleigh, Amsterdam and V2X, the technology explainer blog and the latest video.",
       notes: "Title and angle from the proposed plan; final copy to follow. Email audience and platform to confirm."
     },
     {
@@ -237,7 +206,7 @@ window.IVE_DATA = {
     {
       id: "v34", channel: "jj", date: "2026-11-10", time: "08:30", status: "idea", event: "",
       title: "What a month on the road taught me",
-      copy: "JJ reflects on the common thread across ATARC, Raleigh, Amsterdam and V2X.",
+      copy: "JJ reflects on the common thread across Raleigh, Amsterdam and V2X.",
       notes: "Pillar: Thought leadership. Title and angle from the proposed plan; final copy to follow."
     },
     {

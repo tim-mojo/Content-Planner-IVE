@@ -370,6 +370,21 @@ input[type="month"] { background: var(--surface-2); border: 1px solid var(--line
 .no-image { padding: 48px 20px; text-align: center; color: var(--faint); font-weight: 600; font-size: 13px; background: #120F18; }
 .li .no-image { background: #F3F2EF; color: rgba(0,0,0,.4); }
 
+.foot-left { display: flex; align-items: center; gap: 12px; }
+.btn-save { padding: 9px 26px; }
+.saved-note.is-dirty { color: var(--gold); }
+.btn:disabled { cursor: default; opacity: .45; }
+
+/* Unsaved-changes warning */
+.confirm {
+  width: min(420px, calc(100vw - 32px)); padding: 24px; border: 1px solid var(--line-strong); border-radius: 16px;
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow);
+}
+.confirm::backdrop { background: rgba(5, 3, 10, .6); }
+.confirm h2 { margin: 0 0 8px; font-size: 18px; font-weight: 800; }
+.confirm p { margin: 0 0 20px; color: var(--muted); font-size: 14px; }
+.confirm-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+
 /* ── Toast ───────────────────────────────────────────────── */
 .toast {
   position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 2000;
